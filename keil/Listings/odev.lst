@@ -1,0 +1,111 @@
+A51 MACRO ASSEMBLER  ODEV                                                                 05/04/2020 08:57:47 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\odev.obj
+ASSEMBLER INVOKED BY: H:\Keil_v5\C51\BIN\A51.EXE odev.asm SET(SMALL) DEBUG PRINT(.\Listings\odev.lst) OBJECT(.\Objects\o
+                      dev.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1                     ORG 00H
+0000 802E              2                     SJMP BASLA
+                       3                     
+000B                   4                     ORG 0BH
+000B                   5     KESME_TR0:
+000B 18                6                     DEC R0
+000C 758C3C            7                     MOV TH0,#HIGH(15536)
+000F 758AB0            8                     MOV TL0,#LOW(15536)
+0012 32                9                     RETI
+                      10                     
+0030                  11                     ORG 30H
+0030                  12     BASLA:
+0030 75B000           13                     MOV p3,#00H
+0033 75A000           14                     MOV p2,#00H
+0036 D290             15                     SETB p1.0
+0038                  16     BUTON_BASILDI_MI:
+0038 2090FD           17                     JB p1.0,BUTON_BASILDI_MI
+003B                  18     BUTON_BIRAKILDI_MI:
+003B 2090FA           19                     JB p1.0,BUTON_BASILDI_MI
+                      20             
+003E 75B008           21                     MOV p3,#08H
+0041 75A030           22                     MOV p2,#30H
+0044 118C             23                     ACALL DELAY3
+                      24     
+0046 75B004           25                     MOV p3,#04H   
+0049 75A07D           26                     MOV p2,#7DH
+004C 118C             27                     ACALL DELAY3
+                      28                            
+004E 75B002           29                     MOV p3,#02H   
+0051 75A055           30                     MOV p2,#55H
+0054 118C             31                     ACALL DELAY3
+                      32                     
+0056 75B001           33                     MOV p3,#01H
+0059 75A01F           34                     MOV p2,#1FH             
+005C 118C             35                     ACALL DELAY3
+                      36     
+005E 75B008           37                     MOV p3,#08H
+0061 75A000           38                     MOV p2,#00H
+0064 75B004           39                     MOV p3,#04H
+0067 75A000           40                     MOV p2,#00H
+006A 75B002           41                     MOV p3,#02H
+006D 75A000           42                     MOV p2,#00H
+0070 75B001           43                     MOV p3,#01H
+0073 75A000           44                     MOV p2,#00H             
+                      45                     ;ACALL DELAY_1S
+                      46                     
+0076 80C3             47                     SJMP BUTON_BIRAKILDI_MI
+                      48     
+                      49                     
+0078                  50     DELAY_1S:
+0078 7814             51                     MOV R0,#20 ;20X5000 donmeli
+007A 75A882           52                     MOV IE,#82H ;EA=1 ET0=1 TIMER0 aktif
+007D 758901           53                     MOV TMOD,#01
+0080 758C3C           54                     MOV TH0,#HIGH(15536)
+0083 758AB0           55                     MOV TL0,#LOW(15536)     
+0086 D28C             56                     SETB TR0                
+0088 B800FD           57     DELAY2: CJNE R0,#00H,DELAY2
+A51 MACRO ASSEMBLER  ODEV                                                                 05/04/2020 08:57:47 PAGE     2
+
+008B 22               58                     RET
+                      59     
+008C 78FF             60     DELAY3: MOV R0,#255
+008E 79FF             61                     MOV R1,#255
+0090 D800             62     HERE0:  DJNZ R0,HERE1
+                      63                     
+0092 D9FE             64     HERE1:  DJNZ R1,HERE1
+0094 22               65                     RET
+                      66                     
+                      67                     END
+                                                     
+A51 MACRO ASSEMBLER  ODEV                                                                 05/04/2020 08:57:47 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+BASLA. . . . . . .  C ADDR   0030H   A   
+BUTON_BASILDI_MI .  C ADDR   0038H   A   
+BUTON_BIRAKILDI_MI  C ADDR   003BH   A   
+DELAY2 . . . . . .  C ADDR   0088H   A   
+DELAY3 . . . . . .  C ADDR   008CH   A   
+DELAY_1S . . . . .  C ADDR   0078H   A   
+HERE0. . . . . . .  C ADDR   0090H   A   
+HERE1. . . . . . .  C ADDR   0092H   A   
+IE . . . . . . . .  D ADDR   00A8H   A   
+KESME_TR0. . . . .  C ADDR   000BH   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+P3 . . . . . . . .  D ADDR   00B0H   A   
+TH0. . . . . . . .  D ADDR   008CH   A   
+TL0. . . . . . . .  D ADDR   008AH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR0. . . . . . . .  B ADDR   0088H.4 A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
